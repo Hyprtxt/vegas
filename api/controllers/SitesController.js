@@ -7,7 +7,9 @@
 
 var _ = require('lodash');
 var glob = require('glob');
-var exec = require('child_process').exec;
+var child = require('child_process');
+var exec = child.exec;
+var spawn = child.spawn;
 
 NGINX_PATH = process.env.NGINX_PATH || '/etc/nginx';
 WEB_PATH = process.env.WEB_PATH || '/var/www';
@@ -51,7 +53,7 @@ module.exports = {
 	symlinkCreate: function ( req, res ) {
 		console.log( req.param('site') );
 		if ( req.param('site') != undefined ) {
-			var symlink = 'ln -s /etc/nginx/sites-available/' + req.param('site') + ' /etc/nginx/sites_enabled/' + req.param('site');
+			var symlink = 'ln -s /etc/nginx/sites-available/' + req.param('site') + ' /etc/nginx/sites-enabled/' + req.param('site');
 			exec( symlink, {}, function ( stderr, stdout ) {
 				res.send( symlink );
 			});
@@ -98,16 +100,44 @@ module.exports = {
 	},
 
 	nginxTest: function ( req, res ) {
-		exec('nginx -t', function ( stderr, stdout ) {
-			console.log( stderr, stdout );
-			res.send( preWrap( stdout ) );
+		response = [];
+		test = spawn('nginx', ['-t'], { uid: 0 });
+
+		test.stdout.on('data', function (data) {
+			console.log('stdout: ' + data);
+			response.push('stdout: ' + data);
+		});
+
+		test.stderr.on('data', function (data) {
+			console.log('stderr: ' + data);
+			response.push('stderr: ' + data);
+		});
+
+		test.on('close', function (code) {
+			console.log('child process exited with code ' + code);
+			response.push('child process exited with code ' + code);
+			res.send( preWrap( JSON.stringify( response ) ) );
 		});
 	},
 
 	nginxReload: function ( req, res ) {
-		exec('nginx -s reload', function ( stderr, stdout ) {
-			console.log( stderr, stdout );
-			res.send( preWrap( stdout ) );
+		response = [];
+		test = spawn('nginx', ['-s', 'reload'], { uid: 0 });
+
+		test.stdout.on('data', function (data) {
+			console.log('stdout: ' + data);
+			response.push('stdout: ' + data);
+		});
+
+		test.stderr.on('data', function (data) {
+			console.log('stderr: ' + data);
+			response.push('stderr: ' + data);
+		});
+
+		test.on('close', function (code) {
+			console.log('child process exited with code ' + code);
+			response.push('child process exited with code ' + code);
+			res.send( preWrap( JSON.stringify( response ) ) );
 		});
 	}
 
