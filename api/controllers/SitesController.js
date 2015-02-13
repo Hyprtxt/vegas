@@ -51,7 +51,7 @@ module.exports = {
 	symlinkCreate: function ( req, res ) {
 		console.log( req.param('site') );
 		if ( req.param('site') != undefined ) {
-			var symlink = 'ln -s /etc/nginx/sites_available/' + req.param('site') + ' /etc/nginx/sites_enabled/' + req.param('site');
+			var symlink = 'ln -s /etc/nginx/sites-available/' + req.param('site') + ' /etc/nginx/sites_enabled/' + req.param('site');
 			exec( symlink, {}, function ( stderr, stdout ) {
 				res.send( symlink );
 			});
@@ -64,7 +64,7 @@ module.exports = {
 	symlinkRemove: function ( req, res ) {
 		console.log( req.param('site') );
 		if ( req.param('site') != undefined ) {
-			var unsymlink = 'rm /etc/nginx/sites_enabled/' + req.param('site');
+			var unsymlink = 'rm /etc/nginx/sites-enabled/' + req.param('site');
 			exec( unsymlink, {}, function ( stderr, stdout ) {
 				res.send( unsymlink );
 			});
