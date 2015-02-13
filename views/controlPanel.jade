@@ -16,3 +16,27 @@ block body
 				td=data.enabled[idx]
 	if( data.tomove.length != 0 )
 		p Please remove the following files from the sites-enabled directory, as they do not appear in sites-available.
+		ul
+			each site in data.tomove
+				li=site
+	h2 These Sites are Symlinked
+	ul
+		each site in data.symlinked
+			li
+				a(href='http://'+site)=site 
+				| |
+				a.btn.btn-primary(href="/symlink/remove/"+site) Disable
+	h2 These Sites are Disabled
+	ul
+		each site in data.notsymlinked
+			li
+				a(href='http://'+site)=site 
+				| |
+				a.btn.btn-primary(href="/symlink/create/"+site) Symlink
+
+	br
+	h2 Nginx Manager
+	form(method="POST", action="/nginx/test")
+		button test
+	form(method="POST", action="/nginx/reload")
+		button reload

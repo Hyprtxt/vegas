@@ -55,7 +55,8 @@ module.exports = {
 		if ( req.param('site') != undefined ) {
 			var symlink = 'ln -s /etc/nginx/sites-available/' + req.param('site') + ' /etc/nginx/sites-enabled/' + req.param('site');
 			exec( symlink, {}, function ( stderr, stdout ) {
-				res.send( symlink );
+				console.log( symlink );
+				res.redirect('/panel');
 			});
 		}
 		else {
@@ -68,7 +69,8 @@ module.exports = {
 		if ( req.param('site') != undefined ) {
 			var unsymlink = 'rm /etc/nginx/sites-enabled/' + req.param('site');
 			exec( unsymlink, {}, function ( stderr, stdout ) {
-				res.send( unsymlink );
+				console.log( unsymlink );
+				res.redirect('/panel');
 			});
 		}
 		else {

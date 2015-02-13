@@ -36,37 +36,27 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'GET /panel': {
+  'get /panel': {
     controller: 'PanelController',
     action: 'renderPanel'
   },
 
-  'GET /exec/:command': { 
-    controller: 'SitesController',
-    action: 'exec'
-  },
-
-  'GET /exec/:command/:site': { 
-    controller: 'SitesController',
-    action: 'exec'
-  },
-
-  'GET /symlink/create/:site': { 
+  'get /symlink/create/:site': { 
     controller: 'SitesController',
     action: 'symlinkCreate'
   },
 
-  'GET /symlink/remove/:site': { 
+  'get /symlink/remove/:site': { 
     controller: 'SitesController',
     action: 'symlinkRemove'
   },
 
-  'GET /nginx/test': { 
+  'get /nginx/test': { 
     controller: 'SitesController',
     action: 'nginxTest'
   },
 
-  'GET /nginx/reload': { 
+  'get /nginx/reload': { 
     controller: 'SitesController',
     action: 'nginxReload'
   }
