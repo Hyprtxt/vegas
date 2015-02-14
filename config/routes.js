@@ -57,6 +57,11 @@ module.exports.routes = {
     action: 'siteRead'
   },
 
+  'get /site/package/:site': { 
+    controller: 'SitesController',
+    action: 'sitePackage'
+  },
+
   'get /symlink/create/:site': { 
     controller: 'SitesController',
     action: 'symlinkCreate'

@@ -58,33 +58,13 @@ module.exports = {
 		});
 	},
 
-
-	list: function ( req, res ) {
-		var pileodata = {};
-		glob("*", { cwd: sails.config.nginx_path + '/sites-available' }, function ( er, sites_available ) {
-			glob("*", { cwd: sails.config.nginx_path + '/sites-enabled' }, function ( er, sites_enabled ) {
-				pileodata.symlinked = [];
-				pileodata.notsymlinked = [];
-				_.forEach( sites_available, function ( v, i ) {
-					if( _.includes( sites_enabled, v ) ) {
-						pileodata.symlinked.push( v );
-					}
-					else {
-						pileodata.notsymlinked.push( v );
-					}
-				});
-				pileodata.tomove = [];
-				_.forEach( sites_enabled, function ( v, i ) {
-					if( !_.includes( sites_available, v ) ) {
-						pileodata.tomove.push( v );
-					}
-				});
-				pileodata.available = sites_available;
-				pileodata.enabled = sites_enabled;
-				// res.render('linker', { title: 'Nginx Sites Config', data: pileodata });
-				res.send( pileodata );
-			})
-		})
+	// 'get /site/package/:site'
+	sitePackage: function ( req, res ) {
+		fs.readFile( sails.config.web_path + '/' + req.param('site') + '/package.json', 'utf8', function ( err, data ) {
+			if (err) throw err;
+			res.header('Content-Type', 'application/json');
+			res.send( data );
+		});
 	},
 
 	symlinkCreate: function ( req, res ) {
