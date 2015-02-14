@@ -12,9 +12,6 @@ var exec = child.exec;
 var spawn = child.spawn;
 var fs = require('fs');
 
-NGINX_PATH = process.env.NGINX_PATH || '/etc/nginx';
-WEB_PATH = process.env.WEB_PATH || '/var/www';
-
 preWrap = function( thing ) {
 	return '<pre>' + thing + '</pre>';
 }
@@ -28,7 +25,7 @@ module.exports = {
 	// 'get /site/create/:site'
 	siteCreate: function ( req, res ) {
 		var site = req.param('site');
-		var site_path = '/Users/taylor/etc/nginx/sites-available/' + site;
+		var site_path = sails.config.nginx_path + '/sites-available/' + site;
 		if ( !fs.existsSync( site_path ) ) {
 
 			var content = "server {\n" + 
@@ -54,7 +51,7 @@ module.exports = {
 
 	// 'get /site/read/:site'
 	siteRead: function ( req, res ) {
-		fs.readFile('/etc/nginx/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
+		fs.readFile( sails.config.nginx_path + '/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
 			if (err) throw err;
 			res.header('Content-Type', 'text/plain');
 			res.send( data );
@@ -64,8 +61,8 @@ module.exports = {
 
 	list: function ( req, res ) {
 		var pileodata = {};
-		glob("*", { cwd: NGINX_PATH + '/sites-available' }, function ( er, sites_available ) {
-			glob("*", { cwd: NGINX_PATH + '/sites-enabled' }, function ( er, sites_enabled ) {
+		glob("*", { cwd: sails.config.nginx_path + '/sites-available' }, function ( er, sites_available ) {
+			glob("*", { cwd: sails.config.nginx_path + '/sites-enabled' }, function ( er, sites_enabled ) {
 				pileodata.symlinked = [];
 				pileodata.notsymlinked = [];
 				_.forEach( sites_available, function ( v, i ) {
@@ -93,10 +90,10 @@ module.exports = {
 	symlinkCreate: function ( req, res ) {
 		console.log( req.param('site') );
 		if ( req.param('site') != undefined ) {
-			var symlink = 'ln -s /etc/nginx/sites-available/' + req.param('site') + ' /etc/nginx/sites-enabled/' + req.param('site');
+			var symlink = 'ln -s ' + sails.config.nginx_path + '/sites-available/' + req.param('site') + ' ' + sails.config.nginx_path + '/sites-enabled/' + req.param('site');
 			exec( symlink, {}, function ( stderr, stdout ) {
 				console.log( symlink );
-				res.redirect('/panel');
+				res.redirect('/');
 			});
 		}
 		else {
@@ -107,38 +104,15 @@ module.exports = {
 	symlinkRemove: function ( req, res ) {
 		console.log( req.param('site') );
 		if ( req.param('site') != undefined ) {
-			var unsymlink = 'rm /etc/nginx/sites-enabled/' + req.param('site');
+			var unsymlink = 'rm ' + sails.config.nginx_path + '/sites-enabled/' + req.param('site');
 			exec( unsymlink, {}, function ( stderr, stdout ) {
 				console.log( unsymlink );
-				res.redirect('/panel');
+				res.redirect('/');
 			});
 		}
 		else {
 			res.send('failure');
 		}
-	},
-
-	// 
-	exec: function ( req, res ) {
-		console.log( req.param('command'), req.param('site') );
-		site = req.param('site') || '';
-		switch ( req.param('command') ) {
-			case 'ls':
-				exec('ls -la', { cwd: '/Users/taylor/www/' + site }, function ( stderr, stdout ) {
-					res.send( preWrap( stdout ) );
-				});
-				break;
-			default:
-				res.send('Unrecognised Command');
-				break;
-		}
-	},
-
-	ll: function ( req, res ) {
-		exec('ls', { cwd: '/Users/taylor/www/' }, function ( stderr, stdout ) {
-			console.log( stderr, stdout );
-			res.send( preWrap( stdout ) );
-		});
 	},
 
 	nginxTest: function ( req, res ) {

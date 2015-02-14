@@ -12,6 +12,9 @@
 
 module.exports = {
 
+  web_path: '/var/www',
+  nginx_path: '/etc/nginx',
+
   /***************************************************************************
    * Set the default database connection for models in the production        *
    * environment (see config/connections.js and config/models.js )           *
@@ -25,7 +28,7 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 7222,
+  port: 7222
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
