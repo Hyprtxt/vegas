@@ -72,17 +72,6 @@ module.exports.routes = {
     action: 'siteRoot'
   },
 
-  // 'get /deploy/:site': {
-  //   controller: 'DeployController',
-  //   action: 'gitDeploy'
-  // },
-
-  // 'get /deploy/:site': {
-  //   controller: 'DeployController',
-  //   action: 'gitDeploy'
-  // },
-  // 'get /stage/:site': {},
-
   'get /symlink/create/:site': { 
     controller: 'SitesController',
     action: 'symlinkCreate'
