@@ -149,6 +149,7 @@ module.exports = {
 	nginxReadConfig: function ( req, res ) {
 		fs.readFile('/etc/nginx/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
 			if (err) { return console.log(err); }
+			res.header('Content-Type', 'text/plain');
 			res.send( data );
 		});
 	}
