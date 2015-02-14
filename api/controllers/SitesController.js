@@ -23,10 +23,49 @@ module.exports = {
 	/* GET home page. */
 	// '/' get
 	// router.get('/sites', 
+
+
+	// 'get /site/create/:site'
+	siteCreate: function ( req, res ) {
+		var site = req.param('site');
+		var site_path = '/Users/taylor/etc/nginx/sites-available/' + site;
+		if ( !fs.existsSync( site_path ) ) {
+
+			var content = "server {\n" + 
+			"	root /var/www/" + site + "/public_html;\n" + 
+			"	index index.html index.htm;\n" + 
+			"	server_name " + site + ";\n" + 
+			"	location / {\n" + 
+			"		try_files $uri $uri/ /index.html;\n" + 
+			"	}\n" + 
+			"}\n";
+
+			fs.writeFile( site_path, content, function (err) {
+				if (err) throw err;
+				console.log('It\'s saved!');
+				res.send('Success');
+			});
+
+		}
+		else {
+			res.send('Site Exists');
+		}
+	},
+
+	// 'get /site/read/:site'
+	siteRead: function ( req, res ) {
+		fs.readFile('/etc/nginx/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
+			if (err) throw err;
+			res.header('Content-Type', 'text/plain');
+			res.send( data );
+		});
+	},
+
+
 	list: function ( req, res ) {
 		var pileodata = {};
-		glob("*", { cwd: NGINX_PATH +'/sites-available' }, function ( er, sites_available ) {
-			glob("*", { cwd: NGINX_PATH +'/sites-enabled' }, function ( er, sites_enabled ) {
+		glob("*", { cwd: NGINX_PATH + '/sites-available' }, function ( er, sites_available ) {
+			glob("*", { cwd: NGINX_PATH + '/sites-enabled' }, function ( er, sites_enabled ) {
 				pileodata.symlinked = [];
 				pileodata.notsymlinked = [];
 				_.forEach( sites_available, function ( v, i ) {
@@ -81,7 +120,7 @@ module.exports = {
 
 	// 
 	exec: function ( req, res ) {
-		self = this;		console.log( req.param('command'), req.param('site') );
+		console.log( req.param('command'), req.param('site') );
 		site = req.param('site') || '';
 		switch ( req.param('command') ) {
 			case 'ls':
@@ -141,23 +180,6 @@ module.exports = {
 			console.log('child process exited with code ' + code);
 			response.push('child process exited with code ' + code);
 			res.send( preWrap( JSON.stringify( response ) ) );
-		});
-	},
-
-	// 'get /nginx/config/:site'
-	nginxReadConfig: function ( req, res ) {
-		fs.readFile('/etc/nginx/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
-			if (err) { return console.log(err); }
-			res.header('Content-Type', 'text/plain');
-			res.send( data );
-		});
-	},
-
-	nginxEditConfig: function ( req, res ) {
-		fs.readFile('/etc/nginx/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
-			if (err) { return console.log(err); }
-			res.header('Content-Type', 'text/plain');
-			res.send( data );
 		});
 	}
 
