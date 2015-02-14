@@ -64,7 +64,7 @@ module.exports.routes = {
   'get /nginx/reload': { 
     controller: 'SitesController',
     action: 'nginxReload'
-  }
+  },
 
   'get /nginx/config/:site': { 
     controller: 'SitesController',
