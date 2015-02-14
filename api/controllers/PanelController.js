@@ -50,7 +50,8 @@ module.exports = {
 	},
 	nginxData: function ( req, res ) {
 		getNginxData( function ( data ) {
+			res.setHeader('Content-Type', 'application/json');
 			res.send( JSON.stringify( data, null, 2 ) );
-		})
+		});
 	}
 }

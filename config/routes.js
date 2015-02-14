@@ -43,7 +43,11 @@ module.exports.routes = {
 
   'get /nginx': {
     controller: 'PanelController',
-    action: 'nginxData'
+    action: 'nginxData',
+    cors: {
+      origin: '*'
+    }
+
   },
 
   'get /symlink/create/:site': { 
