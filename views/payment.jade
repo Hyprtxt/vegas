@@ -1,0 +1,18 @@
+//- payment.jade
+extends ./layout
+
+block body
+	.container
+		.col-sm-12
+			h1= title
+			p Welcome to #{title}
+			form
+				p Pay $50 for your first month
+				#checkout
+				input.btn.btn-lg.btn-success(type="submit", value="Pay")
+
+	script(src="https://js.braintreegateway.com/v2/braintree.js", type="text/javascript")
+	script.
+		braintree.setup('!{clientToken}', 'dropin', {
+			container: 'checkout'
+		});

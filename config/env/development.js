@@ -12,16 +12,16 @@
 
 module.exports = {
 
-  web_path: '/Users/taylor/www',
-  nginx_path: '/Users/taylor/etc/nginx',
+	web_path: '/Users/taylor/www',
+	nginx_path: '/Users/taylor/etc/nginx',
 
-  /***************************************************************************
-   * Set the default database connection for models in the development       *
-   * environment (see config/connections.js and config/models.js )           *
-   ***************************************************************************/
+	/***************************************************************************
+	 * Set the default database connection for models in the development       *
+	 * environment (see config/connections.js and config/models.js )           *
+	 ***************************************************************************/
 
-  // models: {
-  //   connection: 'someMongodbServer'
-  // }
+	// models: {
+	//   connection: 'someMongodbServer'
+	// }
 
 };
