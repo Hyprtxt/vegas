@@ -21,6 +21,30 @@ module.exports = {
 	// '/' get
 	// router.get('/sites', 
 
+	// 'get /site/:site'
+	renderSite: function ( req, res ) {
+		fs.readFile( sails.config.nginx_path + '/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
+			if (err) throw err;
+			var data1 = data;
+			var data2 = data;
+			var data3 = data;
+			var view_data = {};
+			if ( config = data3.match(/.*/) ) {
+				view_data.nginx_config = config.toString();
+			}
+			if ( port = data1.match(/\:\d\d\d\d/) ) {
+				view_data.port = port.toString().replace(':','');
+			}
+			if ( root = data2.match(/root\ .*\;/) ) {
+				view_data.root = root.toString().replace('root ','').replace(';','');
+			}
+			console.log( view_data );
+			res.view('sitePanel', {
+				title: 'Site Manager',
+				data: view_data
+			});
+		});
+	},
 
 	// 'get /site/create/:site'
 	siteCreate: function ( req, res ) {
@@ -55,6 +79,30 @@ module.exports = {
 			if (err) throw err;
 			res.header('Content-Type', 'text/plain');
 			res.send( data );
+		});
+	},
+
+	sitePackage: function ( req, res ) {
+		fs.readFile( sails.config.nginx_path + '/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
+			if (err) throw err;
+			res.header('Content-Type', 'text/plain');
+			res.send( data );
+		});
+	},
+
+	sitePort: function ( req, res ) {
+		fs.readFile( sails.config.nginx_path + '/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
+			if (err) throw err;
+			res.header('Content-Type', 'text/plain');
+			res.send( data.match(/\:\d\d\d\d/).toString().replace(':','') );
+		});
+	},
+
+	siteRoot: function ( req, res ) {
+		fs.readFile( sails.config.nginx_path + '/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
+			if (err) throw err;
+			res.header('Content-Type', 'text/plain');
+			res.send( data.match(/root\ .*\;/).toString().replace('root ','').replace(';','') );
 		});
 	},
 

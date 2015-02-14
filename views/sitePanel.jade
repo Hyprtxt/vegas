@@ -1,0 +1,22 @@
+//- controlPanel.jade
+extends ./layout
+
+block body
+	.container
+		.col-sm-12
+			h1= title
+			p Welcome to #{title}
+
+		.col-md-12
+			h2 The Sites
+			table.table.table-striped
+				thead
+					tr
+						th Port
+						th Root Directory
+				tbody
+					tr
+						td=port
+						td=root
+			p good
+			p=nginx_config

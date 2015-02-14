@@ -47,6 +47,11 @@ module.exports.routes = {
     action: 'renderPanel'
   },
 
+  'get /site/:site': { 
+    controller: 'SitesController',
+    action: 'renderSite'
+  },
+
   'get /site/create/:site': { 
     controller: 'SitesController',
     action: 'siteCreate'
@@ -55,6 +60,16 @@ module.exports.routes = {
   'get /site/read/:site': { 
     controller: 'SitesController',
     action: 'siteRead'
+  },
+  
+  'get /site/port/:site': { 
+    controller: 'SitesController',
+    action: 'sitePort'
+  },
+
+  'get /site/root/:site': { 
+    controller: 'SitesController',
+    action: 'siteRoot'
   },
 
   'get /symlink/create/:site': { 
