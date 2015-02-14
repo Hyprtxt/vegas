@@ -47,11 +47,6 @@ module.exports.routes = {
     action: 'renderPanel'
   },
 
-  'get /nginx': {
-    controller: 'PanelController',
-    action: 'nginxData'
-  },
-
   'get /symlink/create/:site': { 
     controller: 'SitesController',
     action: 'symlinkCreate'
@@ -60,6 +55,11 @@ module.exports.routes = {
   'get /symlink/remove/:site': { 
     controller: 'SitesController',
     action: 'symlinkRemove'
+  },
+
+  'get /nginx': {
+    controller: 'PanelController',
+    action: 'nginxData'
   },
 
   'get /nginx/test': { 
@@ -75,6 +75,11 @@ module.exports.routes = {
   'get /nginx/config/:site': { 
     controller: 'SitesController',
     action: 'nginxReadConfig'
+  },
+
+  'get /nginx/config/edit/:site': { 
+    controller: 'SitesController',
+    action: 'nginxEditConfig'
   }
 
   /***************************************************************************
