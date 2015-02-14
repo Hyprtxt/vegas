@@ -41,6 +41,11 @@ module.exports.routes = {
     action: 'renderPanel'
   },
 
+  'get /nginx': {
+    controller: 'PanelController',
+    action: 'nginxData'
+  },
+
   'get /symlink/create/:site': { 
     controller: 'SitesController',
     action: 'symlinkCreate'
@@ -60,7 +65,6 @@ module.exports.routes = {
     controller: 'SitesController',
     action: 'nginxReload'
   }
-
 
   /***************************************************************************
   *                                                                          *
