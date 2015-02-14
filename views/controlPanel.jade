@@ -4,16 +4,16 @@ extends ./layout
 block body
 	h1= title
 	p Welcome to #{title}
-	pre=JSON.stringify( data, null, 2 )
-	table.table
-		tr
-			th Enabled
-			th Available
-		tr
-		each site, idx in data.available
-			tr
-				td=site
-				td=data.enabled[idx]
+	//- pre=JSON.stringify( data, null, 2 )
+	//- table.table
+	//- 	tr
+	//- 		th Enabled
+	//- 		th Available
+	//- 	tr
+	//- 	each site, idx in data.available
+	//- 		tr
+	//- 			td=site
+	//- 			td=data.enabled[idx]
 	if( data.tomove.length != 0 )
 		p Please remove the following files from the sites-enabled directory, as they do not appear in sites-available.
 		ul
