@@ -13,7 +13,7 @@ block body
 				ul
 					each site in data.tomove
 						li=site
-		.col-sm-6.col-lg-4
+		.col-md-6
 			h2 These Sites are Symlinked
 			table.table.table-striped
 				thead
@@ -32,8 +32,8 @@ block body
 							td
 								a.btn.btn-primary(href="//files.hyprtxt.com/"+site) Files
 							td
-								a.btn.btn-primary(href="/nginx/config/"+site) View Config
-		.col-sm-6.col-lg-4
+								a.btn.btn-primary(href="/site/read/"+site) View Config
+		.col-md-6
 			h2 These Sites are Disabled
 			table.table.table-striped
 				thead
@@ -52,8 +52,8 @@ block body
 							td
 								a.btn.btn-primary(href="//files.hyprtxt.com/"+site) Files
 							td
-								a.btn.btn-primary(href="/nginx/config/"+site) View Config
-		.col-sm-6.col-lg-4
+								a.btn.btn-primary(href="/site/read/"+site) View Config
+		.col-md-6
 			h2 Nginx Manager
 			form(method="GET", action="/nginx/test")
 				button.btn.btn-primary test
