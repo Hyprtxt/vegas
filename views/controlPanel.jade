@@ -26,6 +26,10 @@ block body
 				a(href='http://'+site)=site 
 				| |
 				a.btn.btn-primary(href="/symlink/remove/"+site) Disable
+				| |
+				a.btn.btn-primary(href="//files.hyprtxt.com/"+site) Files
+				| |
+				a.btn.btn-primary(href="/nginx/config/"+site) View Config
 	h2 These Sites are Disabled
 	ul
 		each site in data.notsymlinked
@@ -34,7 +38,9 @@ block body
 				| |
 				a.btn.btn-primary(href="/symlink/create/"+site) Symlink
 				| |
-				a.btn.btn-primary(href="files.hyprtxt.com/"+site) Files
+				a.btn.btn-primary(href="//files.hyprtxt.com/"+site) Files
+				| |
+				a.btn.btn-primary(href="/nginx/config/"+site) View Config
 	br
 	h2 Nginx Manager
 	form(method="GET", action="/nginx/test")

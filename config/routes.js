@@ -66,6 +66,11 @@ module.exports.routes = {
     action: 'nginxReload'
   }
 
+  'get /nginx/config/:site': { 
+    controller: 'SitesController',
+    action: 'nginxReadConfig'
+  }
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

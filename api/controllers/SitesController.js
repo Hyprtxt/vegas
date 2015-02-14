@@ -10,6 +10,9 @@ var glob = require('glob');
 var child = require('child_process');
 var exec = child.exec;
 var spawn = child.spawn;
+var fs = require('fs');
+
+
 
 NGINX_PATH = process.env.NGINX_PATH || '/etc/nginx';
 WEB_PATH = process.env.WEB_PATH || '/var/www';
@@ -140,6 +143,13 @@ module.exports = {
 			console.log('child process exited with code ' + code);
 			response.push('child process exited with code ' + code);
 			res.send( preWrap( JSON.stringify( response ) ) );
+		});
+	},
+
+	nginxReadConfig: function ( req, res ) {
+		fs.readFile('/etc/nginx/sites-available/' + req.param('site'), 'utf8', function ( err, data ) {
+			if (err) { return console.log(err); }
+			res.send( data );
 		});
 	}
 
