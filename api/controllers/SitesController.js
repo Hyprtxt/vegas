@@ -58,15 +58,6 @@ module.exports = {
 		});
 	},
 
-	// 'get /site/package/:site'
-	sitePackage: function ( req, res ) {
-		fs.readFile( sails.config.web_path + '/' + req.param('site') + '/package.json', 'utf8', function ( err, data ) {
-			if (err) throw err;
-			res.header('Content-Type', 'application/json');
-			res.send( data );
-		});
-	},
-
 	symlinkCreate: function ( req, res ) {
 		console.log( req.param('site') );
 		if ( req.param('site') != undefined ) {
