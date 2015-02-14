@@ -2,60 +2,48 @@
 extends ./layout
 
 block body
-	.container
-		.col-sm-12
-			h1= title
-			p Welcome to #{title}
-
-		if( data.tomove.length != 0 )
-			.col-sm-12
-				p Please remove the following files from the sites-enabled directory, as they do not appear in sites-available.
-				ul
-					each site in data.tomove
-						li=site
-		.col-sm-6.col-lg-4
-			h2 These Sites are Symlinked
-			table.table.table.striped
-				thead
-					td
-						th URL
-						th
-						th
-						th
-				tbody
-					each site in data.symlinked
-						tr
-							td
-								a(href='http://'+site)=site 
-							td
-								a.btn.btn-primary(href="/symlink/remove/"+site) Disable
-							td
-								a.btn.btn-primary(href="//files.hyprtxt.com/"+site) Files
-							td
-								a.btn.btn-primary(href="/nginx/config/"+site) View Config
-		.col-sm-6.col-lg-4
-			h2 These Sites are Disabled
-			table.table.table.striped
-				thead
-					td
-						th URL
-						th
-						th
-						th
-				tbody
-					each site in data.notsymlinked
-						tr
-							td
-								a(href='http://'+site)=site 
-							td
-								a.btn.btn-primary(href="/symlink/create/"+site) Symlink
-							td
-								a.btn.btn-primary(href="//files.hyprtxt.com/"+site) Files
-							td
-								a.btn.btn-primary(href="/nginx/config/"+site) View Config
-		.col-sm-6.col-lg-4
-			h2 Nginx Manager
-			form(method="GET", action="/nginx/test")
-				button.btn.btn-primary test
-			form(method="GET", action="/nginx/reload")
-				button.btn.btn-primary reload
+	h1= title
+	p Welcome to #{title}
+	//- pre=JSON.stringify( data, null, 2 )
+	//- table.table
+	//- 	tr
+	//- 		th Enabled
+	//- 		th Available
+	//- 	tr
+	//- 	each site, idx in data.available
+	//- 		tr
+	//- 			td=site
+	//- 			td=data.enabled[idx]
+	if( data.tomove.length != 0 )
+		p Please remove the following files from the sites-enabled directory, as they do not appear in sites-available.
+		ul
+			each site in data.tomove
+				li=site
+	h2 These Sites are Symlinked
+	ul
+		each site in data.symlinked
+			li
+				a(href='http://'+site)=site 
+				| |
+				a.btn.btn-primary(href="/symlink/remove/"+site) Disable
+				| |
+				a.btn.btn-primary(href="//files.hyprtxt.com/"+site) Files
+				| |
+				a.btn.btn-primary(href="/nginx/config/"+site) View Config
+	h2 These Sites are Disabled
+	ul
+		each site in data.notsymlinked
+			li
+				a(href='http://'+site)=site 
+				| |
+				a.btn.btn-primary(href="/symlink/create/"+site) Symlink
+				| |
+				a.btn.btn-primary(href="//files.hyprtxt.com/"+site) Files
+				| |
+				a.btn.btn-primary(href="/nginx/config/"+site) View Config
+	br
+	h2 Nginx Manager
+	form(method="GET", action="/nginx/test")
+		button test
+	form(method="GET", action="/nginx/reload")
+		button reload
