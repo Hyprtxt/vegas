@@ -6,13 +6,38 @@ block body
 		.col-sm-12
 			h1= title
 			p Welcome to #{title}
-			form
-				p Pay $50 for your first month
-				#checkout
-				input.btn.btn-lg.btn-success(type="submit", value="Pay")
+			if clientToken
+				form
+					p Pay $100 for your first month
 
-	script(src="https://js.braintreegateway.com/v2/braintree.js", type="text/javascript")
-	script.
-		braintree.setup('!{clientToken}', 'dropin', {
-			container: 'checkout'
-		});
+					.form-group
+						label(for="firstName") firstName
+						input.form-control(id="firstName")
+					.form-group
+						label(for="lastName") lastName
+						input.form-control(id="lastName")
+					.form-group
+						label(for="company") company
+						input.form-control(id="company")
+					.form-group
+						label(for="email") email
+						input.form-control(id="email")
+					.form-group
+						label(for="phone") phone
+						input.form-control(id="phone")
+					.form-group
+						label(for="fax") fax
+						input.form-control(id="fax")
+					.form-group
+						label(for="website") website
+						input.form-control(id="website")
+
+					#checkout
+					input.btn.btn-lg.btn-success(type="submit", value="Pay")
+				script(src="https://js.braintreegateway.com/v2/braintree.js", type="text/javascript")
+				script.
+					braintree.setup('!{clientToken}', 'dropin', {
+						container: 'checkout'
+					});
+			else
+				p Thanks for completing that process. You are now a customer.

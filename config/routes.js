@@ -43,11 +43,6 @@ module.exports.routes = {
   },
 
   'get /': {
-    controller: 'panel',
-    action: 'renderPanel'
-  },
-
-  'get /payment': {
     controller: 'payment',
     action: 'showCheckout'
   },
@@ -56,61 +51,6 @@ module.exports.routes = {
     controller: 'payment',
     action: 'chargeFive'
   },
-
-  'get /site/:site': { 
-    controller: 'sites',
-    action: 'renderSite'
-  },
-
-  'get /site/create/:site': { 
-    controller: 'sites',
-    action: 'siteCreate'
-  },
-
-  'get /site/read/:site': { 
-    controller: 'sites',
-    action: 'siteRead'
-  },
-  
-  'get /site/port/:site': { 
-    controller: 'sites',
-    action: 'sitePort'
-  },
-
-  'get /site/root/:site': { 
-    controller: 'sites',
-    action: 'siteRoot'
-  },
-
-  'get /symlink/create/:site': { 
-    controller: 'sites',
-    action: 'symlinkCreate'
-  },
-
-  'get /symlink/remove/:site': { 
-    controller: 'sites',
-    action: 'symlinkRemove'
-  },
-
-  'get /nginx': {
-    controller: 'PanelController',
-    action: 'nginxData'
-  },
-
-  'get /nginx/test': { 
-    controller: 'sites',
-    action: 'nginxTest'
-  },
-
-  'get /nginx/reload': { 
-    controller: 'sites',
-    action: 'nginxReload'
-  },
-
-  // 'get /nginx/config/edit/:site': { 
-  //   controller: 'sites',
-  //   action: 'nginxEditConfig'
-  // }
 
   /***************************************************************************
   *                                                                          *

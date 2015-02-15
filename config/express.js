@@ -6,35 +6,33 @@ var verifyHandler = function(token, tokenSecret, profile, done) {
   process.nextTick(function() {
 
     // console.log( profile );
+    
+    User.findOne({uid: profile.id}, function(err, user) {
+      if (user) {
+        return done(null, user);
+      } else {
 
-    if ( profile.displayName === 'Taylor Young' ) {
-      User.findOne({uid: profile.id}, function(err, user) {
-        if (user) {
-          return done(null, user);
-        } else {
+        var data = {
+          provider: profile.provider,
+          uid: profile.id,
+          name: profile.displayName
+        };
 
-          var data = {
-            provider: profile.provider,
-            uid: profile.id,
-            name: profile.displayName
-          };
-
-          if (profile.emails && profile.emails[0] && profile.emails[0].value) {
-            data.email = profile.emails[0].value;
-          }
-          if (profile.name && profile.name.givenName) {
-            data.firstname = profile.name.givenName;
-          }
-          if (profile.name && profile.name.familyName) {
-            data.lastname = profile.name.familyName;
-          }
-
-          User.create(data, function(err, user) {
-            return done(err, user);
-          });
+        if (profile.emails && profile.emails[0] && profile.emails[0].value) {
+          data.email = profile.emails[0].value;
         }
-      });
-    }
+        if (profile.name && profile.name.givenName) {
+          data.firstname = profile.name.givenName;
+        }
+        if (profile.name && profile.name.familyName) {
+          data.lastname = profile.name.familyName;
+        }
+
+        User.create(data, function(err, user) {
+          return done(err, user);
+        });
+      }
+    });
 
   });
 };

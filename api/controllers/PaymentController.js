@@ -20,14 +20,44 @@ var gateway = braintree.connect( config );
 module.exports = {
 
 	showCheckout: function ( req, res ) {
-		gateway.clientToken.generate({
-			// customerId: aCustomerId
-		}, function (err, response) {
-			var clientToken = response.clientToken
+		if( req.query.payment_method_nonce != undefined ) {
+			// console.log( req.query.payment_method_nonce );
 			res.view( 'payment', {
 				title: 'Checkout Page',
-				clientToken: clientToken
+				clientToken: false,
+				payment_method_nonce: req.query.payment_method_nonce
 			});
+		}
+		else {
+			gateway.clientToken.generate({
+				// customerId: aCustomerId
+			}, function (err, response) {
+				var clientToken = response.clientToken
+				res.view( 'payment', {
+					title: 'Checkout Page',
+					clientToken: clientToken,
+					payment_method_nonce: false
+				});
+			});
+		}
+	},
+
+	processCheckout: function ( req, res ) {
+		if( req.query.payment_method_nonce != undefined ) {
+			console.log( req.query.payment_method_nonce );
+		}
+		gateway.customer.create({
+			firstName: "Taylor",
+			lastName: "Young",
+			company: "Hyprtxt",
+			email: "taylor@hyprtxt.com",
+			phone: "214.799.3897",
+			website: "hyprtxt.com"
+		}, function (err, result) {
+			result.success;
+			// true
+			result.customer.id;
+			// e.g. 494019
 		});
 	},
 
