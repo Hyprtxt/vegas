@@ -11,16 +11,32 @@ block body
 			.col-sm-12
 				p name: 
 					span.name
+				p mood: 
+					span.mood
 				p age: 
 					span.age
 				p location: 
 					span.location
 				p money: $
-					span.money 0
+					span.cash 0
+				P inventory: 
+					span.inventory
 				hr
 				p Hows your life going?
-				button.mood(data-mood='good') Pretty Good
-				button.mood(data-mood='perfect') Get me out of here
-				.hidden
+				button.moodSelect(data-mood='denial') Pretty Good
+				button.moodSelect(data-mood='perfect') Get me out of here
+				.hidden.one
 					p.response
-					button.buyTicket Buy a plane ticket to vegas
+					button.getCash Get a Cash Advance
+				.hidden.two
+					button.buyTicket Buy a Plane Ticket to Vegas ($150)
+				.hidden.three
+					p You look like you're ready to go.
+					form(action='step3.html' method='get')
+						input(type='hidden' name='name' value='')
+						input(type='hidden' name='mood' value='')
+						input(type='hidden' name='age' value='')
+						input(type='hidden' name='location' value='')
+						input(type='hidden' name='cash' value='')
+						input(type='hidden' name='inventory' value='')
+						button.fly Fly to Vegas
