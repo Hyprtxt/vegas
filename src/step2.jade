@@ -1,0 +1,26 @@
+extends layout
+
+block body
+	-page_script = 'js/step2.js'
+	.container
+		.row
+			.col-sm-12
+				h1=title
+				p=description
+		.row#intro2
+			.col-sm-12
+				p name: 
+					span.name
+				p age: 
+					span.age
+				p location: 
+					span.location
+				p money: $
+					span.money 0
+				hr
+				p Hows your life going?
+				button.mood(data-mood='good') Pretty Good
+				button.mood(data-mood='perfect') Get me out of here
+				.hidden
+					p.response
+					button.buyTicket Buy a plane ticket to vegas

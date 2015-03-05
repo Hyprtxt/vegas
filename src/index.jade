@@ -1,23 +1,29 @@
-doctype html
-html
-	include ./jade/head.jade
-	body
-		.container
-			.row
-				.col-sm-12
-					h1=title
-					p=description
-			.row
-				.col-sm-12
-					p Welcome to the game
-					form
-						.form-group
-							label Name
-							input#name(type='text')
-						.form-group
-							label Age
-							input#age(type='text')
-						.form-group
-							label Location
-							input#location(type='text')
-		include ./jade/foot.jade
+extends layout
+
+block body
+	-var page_script = 'js/index.js'
+	.container
+		.row
+			.col-sm-12
+				h1=title
+				p=description
+		.row#intro1
+			.col-sm-12
+				p Welcome to the game
+				form(action='step2.html' method='get')
+					.form-group
+						label Name
+						input#name(type='text' name='name')
+					.form-group
+						label Age
+						input#age(type='number' name='age')
+					.form-group
+						label Location
+						input#location(type='text' name='location')
+					//- .form-group
+						label Birthday Month
+						input#bmonth(type='month')
+					//- .form-group
+						label Birthday Day
+						input#bday(type='number')
+					button.btn.btn-success Start

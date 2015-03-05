@@ -18,22 +18,23 @@
           <p>A Game</p>
         </div>
       </div>
-      <div class="row">
+      <div id="intro1" class="row">
         <div class="col-sm-12">
           <p>Welcome to the game</p>
-          <form>
+          <form action="step2.html" method="get">
             <div class="form-group">
               <label>Name</label>
-              <input id="name" type="text">
+              <input id="name" type="text" name="name">
             </div>
             <div class="form-group">
               <label>Age</label>
-              <input id="age" type="text">
+              <input id="age" type="number" name="age">
             </div>
             <div class="form-group">
               <label>Location</label>
-              <input id="location" type="text">
+              <input id="location" type="text" name="location">
             </div>
+            <button class="btn btn-success">Start</button>
           </form>
         </div>
       </div>
@@ -43,7 +44,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <p class="footer-info">Site last modified: <span>Thu Mar 05 2015 10:12:39 GMT-0600 (CST)</span></p>
+            <p class="footer-info">Site last modified: <span>Thu Mar 05 2015 10:54:59 GMT-0600 (CST)</span></p>
           </div>
         </div>
       </div>
@@ -52,5 +53,6 @@
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/pace/pace.js"></script>
     <script src="../dev/js/script.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
