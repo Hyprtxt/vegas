@@ -8,8 +8,14 @@ setPlayerValue 'location', 'The Lobby'
 setPlayerValue 'cash', '600.00'
 setPlayerValue 'inventory', 'roomKeys, playersClubCard'
 
-
-
+card1 = new Card(
+	suit: 0
+	value: 0
+)
+card2 = new Card(
+	suit: 1
+	value: 0
+)
 
 window.player = new Player(
 	name: 'Taylor'
@@ -32,13 +38,4 @@ player.useHour()
 player.useHour()
 console.log player.today()
 
-
-# card1 = new Card(
-# 	suit: 0
-# 	value: 0
-# )
-# card2 = new Card(
-# 	suit: 1
-# 	value: 0
-# )
-# console.log card1.unicodeSuit(), card2.unicodeSuit(), card1.color()
+console.log card1.unicodeSuit(), card2.unicodeSuit(), card1.color()
