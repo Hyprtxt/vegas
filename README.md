@@ -1,3 +1,4 @@
-# nginx.hyprtxt.com
+# Casino Game
 
-a [Sails](http://sailsjs.org) application
+Built with the Hyprtxt Static Dev Env
+

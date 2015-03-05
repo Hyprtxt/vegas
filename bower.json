@@ -1,4 +1,13 @@
 {
+  "name": "hyprtxt",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Hyprtxt/grunt-dev",
+  "authors": [
+    "Taylor Young <tdy721@gmail.com>"
+  ],
+  "description": "Taylor's Hyprtxt Dev Enviornment",
+  "license": "MIT",
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -7,10 +16,12 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.2"
-  },
-  "name": "nginx.hyprtxt.com",
-  "version": "0.0.0",
-  "author": "taylor",
-  "private": true
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.3.2",
+    "lodash": "~3.0.0",
+    "jsviews": "~1.0.0-alpha",
+    "pace": "~1.0.2",
+    "tablesaw": "~1.0.1",
+    "chartist": "~0.6.0"
+  }
 }

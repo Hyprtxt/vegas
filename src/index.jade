@@ -1,0 +1,23 @@
+doctype html
+html
+	include ./jade/head.jade
+	body
+		.container
+			.row
+				.col-sm-12
+					h1=title
+					p=description
+			.row
+				.col-sm-12
+					p Welcome to the game
+					form
+						.form-group
+							label Name
+							input#name(type='text')
+						.form-group
+							label Age
+							input#age(type='text')
+						.form-group
+							label Location
+							input#location(type='text')
+		include ./jade/foot.jade
