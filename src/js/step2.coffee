@@ -1,8 +1,8 @@
 console.log 'step2.coffee'
 
-setPlayerValue( 'name', getParameterByName( 'name' ) )
-setPlayerValue( 'age', getParameterByName( 'age' ) )
-setPlayerValue( 'location', getParameterByName( 'location' ) )
+console.log the_player
+
+the_player.update()
 
 $( '.moodSelect' ).on 'click', ( e ) ->
 	mood = $( e.target ).data('mood')
@@ -10,20 +10,22 @@ $( '.moodSelect' ).on 'click', ( e ) ->
 		$( '.response' ).text( 'Perfect, lets go...' )
 	else
 		$( '.response' ).text( 'Um, we both know thats not true...' )
-	setPlayerValue( 'mood', mood )
+	the_player.set( 'mood', mood )
 	$( '.moodSelect' ).hide()
 	$( '.hidden.one' ).removeClass( 'hidden' )
 
 
 $( '.getCash' ).on 'click', ( e ) ->
-	setPlayerValue( 'cash', '1000.00' )
+	the_player.set( 'cash', 1000 )
 	$( '.getCash' ).hide()
 	$( '.hidden.two' ).removeClass( 'hidden' )
 
 $( '.buyTicket' ).on 'click', ( e ) ->
-	setPlayerValue( 'cash', '850.00' )
-	setPlayerValue( 'inventory', '1 Ticket to Ride' )
+	the_player.set( 'cash', 850 )
+	the_player.set( 'inventory', ['1 Ticket to Ride'] )
 	$( '.buyTicket' ).hide()
 	$( '.hidden.three' ).removeClass( 'hidden' )
 
 $( '.fly' ).on 'click', ( e ) ->
+	the_player.save()
+	return

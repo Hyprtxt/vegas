@@ -11,14 +11,12 @@ block body
 			.col-sm-12
 				p Welcome to The Grand
 				p You can checkout anytime you like, but you can never leave
-				form(action='' method='get')
-					input(type='hidden' name='name' value='')
-					input(type='hidden' name='mood' value='')
-					input(type='hidden' name='age' value='')
-					input(type='hidden' name='location' value='')
-					input(type='hidden' name='cash' value='')
-					input(type='hidden' name='inventory' value='')
-					button(data-action='loiter') loiter
-					button(data-action='room.html') Go to your room
-					button(data-action='buffet.html') Go to the buffet
-					button(data-action='poker.html') Go to the video poker machines
+				pre#plays
+				.btn-group
+					button.btn.btn-primary(data-action='loiter') loiter
+					button.btn.btn-primary(data-action='room') Go to your room
+					button.btn.btn-primary(data-action='buffet') Go to the buffet
+					.input-group
+						input#bet.form-control(type='text' placeholder='bet' value='1')
+						span.input-group-btn
+							button.btn.btn-primary(data-action='poker') Go to the video poker machines

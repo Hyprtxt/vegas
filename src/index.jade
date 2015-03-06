@@ -2,6 +2,8 @@ extends layout
 
 block body
 	-var page_script = 'js/index.js'
+	style.
+		.player { display: none }
 	.container
 		.row
 			.col-sm-12
@@ -11,19 +13,19 @@ block body
 			.col-sm-12
 				p Welcome to the game
 				form(action='step2.html' method='get')
-					.form-group
+					.form-group.col-sm-6
 						label Name
-						input#name(type='text' name='name')
-					.form-group
-						label Age
-						input#age(type='number' name='age')
-					.form-group
+						input#name.form-control(type='text' name='name')
+					.form-group.col-sm-6
 						label Location
-						input#location(type='text' name='location')
-					//- .form-group
+						input#location.form-control(type='text' name='location')
+					.form-group.col-sm-4
+						label Birthday Year
+						input#birthYear.form-control(type='number' min=1900 max=2010)
+					.form-group.col-sm-4
 						label Birthday Month
-						input#bmonth(type='month')
-					//- .form-group
+						input#birthMonth.form-control(type='number' min=1 max=12)
+					.form-group.col-sm-4
 						label Birthday Day
-						input#bday(type='number')
+						input#birthDay.form-control(type='number' min=1 max=31)
 					button.btn.btn-success Start

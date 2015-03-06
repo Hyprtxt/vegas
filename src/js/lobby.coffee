@@ -1,44 +1,62 @@
-'use strict'
-console.log 'checkin.coffee'
+# 'use strict'
+console.log 'lobby.coffee'
 
-setPlayerValue 'name', getParameterByName( 'name' )
-setPlayerValue 'mood', getParameterByName( 'mood' )
-setPlayerValue 'age', getParameterByName( 'age' )
-setPlayerValue 'location', 'The Lobby'
-setPlayerValue 'cash', '600.00'
-setPlayerValue 'inventory', 'roomKeys, playersClubCard'
-
-
+# setPlayerValue 'name', getParameterByName( 'name' )
+# setPlayerValue 'mood', getParameterByName( 'mood' )
+# setPlayerValue 'age', getParameterByName( 'age' )
+# setPlayerValue 'location', 'The Lobby'
+# setPlayerValue 'cash', '600.00'
+# setPlayerValue 'inventory', 'roomKeys, playersClubCard'
 
 
-window.player = new Player(
-	name: 'Taylor'
-	mood: 'fair'
-	location: 'Vegas Baby'
-	cash: '0.00'
-	inventory: ['spareChange']
-	birthYear: 1987
-	birthMonth: 7
-	birthDay: 21
-	playerRetireDate: new Date().getTime()
-	playerDay: 100
-	playerHour: 6
-)
-
-# console.log player.birthDay()
-# console.log player.age()
-console.log player.today()
-player.useHour()
-player.useHour()
-console.log player.today()
+the_player.update()
+console.log the_player.time()
+# the_player.useHour()
+# the_player.useHour()
+# console.log the_player.time()
 
 
-# card1 = new Card(
-# 	suit: 0
-# 	value: 0
-# )
-# card2 = new Card(
-# 	suit: 1
-# 	value: 0
-# )
-# console.log card1.unicodeSuit(), card2.unicodeSuit(), card1.color()
+
+
+$( 'button' ).on 'click', ( e ) ->
+	action = $( e.target ).data('action')
+	if the_player.opts.hunger is 20 and action isnt 'buffet'
+		alert 'Too hungry, must eat'
+		return false
+	if the_player.opts.stamina is 0 and action isnt 'room'
+		alert 'Too tired, must sleep'
+		return false
+	if action is 'loiter'
+		the_player.loiter()
+		# the_player.update()
+		the_player.save()
+	if action is 'buffet'
+		the_player.purchaseBuffet()
+		the_player.save()
+	if action is 'room'
+		the_player.sleep()
+		the_player.save()
+	if action is 'poker'
+		hands = the_player.handsPerHour()
+		bet = $('#bet').val()
+		$.getJSON 'http://localhost:3000/' + hands + '/' + bet, ( data ) ->
+			console.log( data )
+			$pre = $('pre')
+			$pre.html('')
+			data.games.map ( v, i ) ->
+				$pre.append( i + ' ' + v.draw + ' -> ' + v.play + ' ' + v.score.status + ' ' + v.score.win + '\n' )
+			$pre.append( '\n' )
+			$pre.append( 'Hands: ' + data.hands + '\n' )
+			$pre.append( 'Spend: ' + data.spend + '\n' )
+			$pre.append( 'Payout: ' + data.credits + '\n' )
+			sHeight = $pre[0].scrollHeight
+			$pre.scrollTop( sHeight )
+			the_player.set 'spend', the_player.get('spend') + data.spend
+			the_player.set 'hands', the_player.get('hands') + data.hands
+			the_player.set 'cash', the_player.get('cash') + data.credits
+			# the_player.set 'spend' 
+			# the_player.set 'spend' 
+		the_player.loiter()
+		the_player.update()
+		the_player.save()
+	console.log 

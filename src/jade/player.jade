@@ -1,6 +1,6 @@
 //- player.jade
 hr
-.footer
+.footer.player
 	.container
 		.row
 			.col-sm-3
@@ -10,8 +10,10 @@ hr
 					span.mood
 				p age: 
 					span.age
-				p today:
-					span.today
+				p date: 
+					span.date
+				p time: 
+					span.time
 			.col-sm-3
 				p location: 
 					span.location
@@ -21,11 +23,21 @@ hr
 					span.stamina 20
 					| /20
 				p hunger: 
-					span.stamina 10
+					span.hunger 10
 					| /20
 			.col-sm-3
-				p inventory: 
+				//- p inventory: 
 					span.inventory
+				p spend: 
+					spand.spend
+				p hands played: 
+					span.hands
+				//- p speed: 
+					span.speed
+				p speed: 
+					span.speedMod
+				p hands per hour: 
+					span.handsPerHour
 			.col-sm-3
 				p.footer-info Site last modified: 
 					span=timestamp

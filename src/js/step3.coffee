@@ -1,16 +1,10 @@
 console.log 'checkin.coffee'
 
-setPlayerValue 'name', getParameterByName( 'name' )
-setPlayerValue 'mood', getParameterByName( 'mood' )
-setPlayerValue 'age', getParameterByName( 'age' )
-setPlayerValue 'location', getParameterByName( 'location' )
-setPlayerValue 'cash', getParameterByName( 'cash' )
-setPlayerValue 'inventory', ''
+the_player.set( 'location', 'Las Vegas, NV' )
+the_player.update()
 
-
-# Hotel::thing () ->
-# 	@opts
-# 	@daily_rate = options.daily_rate or 
-# 	@weekly_rate = options.weekly_rate or 
-
-# Player::init () ->
+$( 'button' ).on 'click', () ->
+	the_player.spend( 250 )
+	the_player.updateStatic( 'cash' )
+	the_player.save()
+	return
