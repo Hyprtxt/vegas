@@ -4,6 +4,13 @@ module.exports = {
 	, javascripts: [
 		'bower_components/jquery/dist/jquery.js'
 		, 'bower_components/pace/pace.js'
+		, 'dev/js/_Card.js'
+		, 'dev/js/_Deck.js'
+		, 'dev/js/_Hand.js'
+		, 'dev/js/_Poker.js'
+		, 'dev/js/_Simple.js'
+
+		, 'dev/js/_Player.js'
 		, 'dev/js/script.js'
 	]
 	, stylesheets: [

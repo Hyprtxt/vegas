@@ -48,10 +48,11 @@ $( 'button' ).on 'click', ( e ) ->
 
 	if action is 'poker'
 		hands = the_player.handsPerHour()
-		bet = $('#bet').val()
-		if bet > 1000 or bet < 1
-			alert( 'bet should be between 1 and 1000')
-			return false
+		bet = 1
+		# bet = $('#bet').val()
+		# if bet > 1000 or bet < 1
+		# 	alert( 'bet should be between 1 and 1000')
+		# 	return false
 		$.getJSON 'http://localhost:3000/' + hands + '/' + bet, ( data ) ->
 			console.log( data )
 			$pre = $('pre')
