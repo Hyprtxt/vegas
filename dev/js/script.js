@@ -71,8 +71,8 @@
     this.opts.birthMonth = options.birthMonth || 7;
     this.opts.inventory = options.inventory || [];
     this.opts.playerRetireDate = options.playerRetireDate || new Date().now();
-    this.opts.playerDay = options.playerDay || 5;
-    this.opts.playerHour = options.playerHour || 6;
+    this.opts.playerDay = options.playerDay || 0;
+    this.opts.playerHour = options.playerHour || 9;
     return this;
   };
 
@@ -98,6 +98,7 @@
     this.updateStatic('spend');
     this.updateStatic('hands');
     this.updateStatic('speed');
+    this.updateStatic('playerDay');
     this.updateDynamic('handsPerHour', this.handsPerHour());
     this.updateDynamic('speedMod', this.speedMod());
     return true;
@@ -105,14 +106,17 @@
 
   Player.prototype.speedMod = function() {
     if (this.opts.hands > 1000000) {
-      return 2;
+      return 3;
+    }
+    if (this.opts.hands > 100000) {
+      return (Math.round(this.opts.hands / 1000) / 1000) + 2;
     } else {
-      return (Math.round(this.opts.hands / 1000) / 1000) + 1;
+      return (Math.round(this.opts.hands / 100) / 1000) + 1;
     }
   };
 
   Player.prototype.handsPerHour = function() {
-    return Math.floor(this.speedMod() * 720);
+    return Math.floor(this.speedMod() * 300);
   };
 
   Player.prototype.get = function(key) {
@@ -214,6 +218,10 @@
       this.opts.playerDay++;
     } else {
       this.opts.playerHour++;
+    }
+    if (hours === 10) {
+      this.set('cash', this.opts.cash - 50);
+      this.updateStatic('cash');
     }
     this.updateDynamic('date', this.date());
     this.updateDynamic('time', this.time());

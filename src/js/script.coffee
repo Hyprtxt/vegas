@@ -61,8 +61,8 @@ window.Player = ( options ) ->
 	@opts.inventory = options.inventory or []
 
 	@opts.playerRetireDate = options.playerRetireDate or new Date().now()
-	@opts.playerDay = options.playerDay or 5
-	@opts.playerHour = options.playerHour or 6
+	@opts.playerDay = options.playerDay or 0
+	@opts.playerHour = options.playerHour or 9
 
 	return @
 
@@ -86,18 +86,23 @@ Player::update = () ->
 	@updateStatic( 'spend' )
 	@updateStatic( 'hands' )
 	@updateStatic( 'speed' )
+	@updateStatic( 'playerDay' )
 	@updateDynamic( 'handsPerHour', @handsPerHour() )
 	@updateDynamic( 'speedMod', @speedMod() )
 	return true
 
 Player::speedMod = () ->
+	
 	if @opts.hands > 1000000
-		return 2
+		return 3
+	if @opts.hands > 100000
+		return ( Math.round( ( @opts.hands/1000 ) )/1000 ) + 2
 	else
-		return ( Math.round( ( @opts.hands/1000 ) )/1000 ) + 1
+		return ( Math.round( ( @opts.hands/100 ) )/1000 ) + 1
+		
 
 Player::handsPerHour = () ->
-	return Math.floor( @speedMod() * 720 )
+	return Math.floor( @speedMod() * 300 )
 
 Player::get = ( key ) ->
 	return @opts[key]
@@ -177,6 +182,9 @@ Player::useHour = () ->
 		@opts.playerDay++
 	else
 		@opts.playerHour++
+	if hours is 10
+		@set 'cash', @opts.cash - 50 
+		@updateStatic( 'cash' )
 	@updateDynamic( 'date', @date() )
 	@updateDynamic( 'time', @time() )
 	return true

@@ -15,7 +15,7 @@ console.log the_player.time()
 # the_player.useHour()
 # console.log the_player.time()
 
-
+buffet = 'unset'
 
 
 $( 'button' ).on 'click', ( e ) ->
@@ -26,19 +26,32 @@ $( 'button' ).on 'click', ( e ) ->
 	if the_player.opts.stamina is 0 and action isnt 'room'
 		alert 'Too tired, must sleep'
 		return false
+
 	if action is 'loiter'
 		the_player.loiter()
 		# the_player.update()
 		the_player.save()
+
 	if action is 'buffet'
-		the_player.purchaseBuffet()
+		if buffet is true
+			the_player.stayAtBuffet()
+		else
+			buffet = true
+			the_player.purchaseBuffet()
 		the_player.save()
+	else
+		buffet = false
+
 	if action is 'room'
 		the_player.sleep()
 		the_player.save()
+
 	if action is 'poker'
 		hands = the_player.handsPerHour()
 		bet = $('#bet').val()
+		if bet > 1000 or bet < 1
+			alert( 'bet should be between 1 and 1000')
+			return false
 		$.getJSON 'http://localhost:3000/' + hands + '/' + bet, ( data ) ->
 			console.log( data )
 			$pre = $('pre')
@@ -59,4 +72,4 @@ $( 'button' ).on 'click', ( e ) ->
 		the_player.loiter()
 		the_player.update()
 		the_player.save()
-	console.log 
+	console.log buffet
