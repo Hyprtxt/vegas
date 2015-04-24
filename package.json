@@ -9,7 +9,7 @@
   "author": "Taylor Young",
   "repository": "git@github.com:Hyprtxt/vegas.git",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "grunt": "^0.4.5",
     "grunt-available-tasks": "^0.5.4",
     "grunt-build-docs": "^0.4.0-rc7",
