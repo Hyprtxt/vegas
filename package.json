@@ -7,7 +7,7 @@
     "start": "grunt"
   },
   "author": "Taylor Young",
-  "repository": "",
+  "repository": "git@github.com:Hyprtxt/vegas.git",
   "license": "MIT",
   "devDependencies": {
     "grunt": "^0.4.5",
