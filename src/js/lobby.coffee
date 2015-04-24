@@ -53,7 +53,7 @@ $( 'button' ).on 'click', ( e ) ->
 		# if bet > 1000 or bet < 1
 		# 	alert( 'bet should be between 1 and 1000')
 		# 	return false
-		$.getJSON 'http://localhost:3000/' + hands + '/' + bet, ( data ) ->
+		$.getJSON 'http://cards.hyprtxt.com/' + hands + '/' + bet, ( data ) ->
 			console.log( data )
 			$pre = $('pre')
 			$pre.html('')

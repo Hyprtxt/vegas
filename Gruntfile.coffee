@@ -128,7 +128,7 @@ module.exports = ( grunt ) ->
 
 		clean: 
 			dev: ['dev']
-			dest: ['dest']
+			dest: ['public_html']
 
 		jshint:
 			all: ['dev/js/*.js']
