@@ -13,18 +13,18 @@ module.exports = ( grunt ) ->
 		uglify:
 			production:
 				files:
-					'dest/js/bundle.js': config.javascripts
+					'public_html/js/bundle.js': config.javascripts
 
 		cssmin:
 			production:
 				files:
-					'dest/css/bundle.css': config.stylesheets
+					'public_html/css/bundle.css': config.stylesheets
 
 		# Alternate to cssmin 
 		concat:
 			production:
 				files:
-					'dest/css/bundle.css': config.stylesheets
+					'public_html/css/bundle.css': config.stylesheets
 
 		copy:
 			src_files:
@@ -46,8 +46,8 @@ module.exports = ( grunt ) ->
 				expand: true
 				flatten: false
 				cwd: 'dev'
-				src: ['**', '!js/**', '!css/**']
-				dest: 'dest/'
+				src: ['**', '!css/**']
+				dest: 'public_html/'
 
 		stylus:
 			options:

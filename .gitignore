@@ -1,5 +1,6 @@
 dev
 dest
+public_html
 
 config/local.js
 node_modules
