@@ -9,6 +9,7 @@ module.exports = {
 		, 'dev/js/_Hand.js'
 		, 'dev/js/_Poker.js'
 		, 'dev/js/_Simple.js'
+		// , 'dev/js/_Optimal.js'
 
 		, 'dev/js/_Player.js'
 		, 'dev/js/script.js'

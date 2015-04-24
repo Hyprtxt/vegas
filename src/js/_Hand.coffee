@@ -2,7 +2,7 @@
 
 # Hand Object
 
-window.Hand = ( options ) ->
+Hand = ( options ) ->
 	@opts = options or {}
 	@opts.deck = options.deck
 	@opts.size = options.size or 0
@@ -30,5 +30,10 @@ Hand::keepOne = ( index ) ->
 			@replace( idx )
 	)
 	return
+
+if typeof window is null
+	module.exports Hand
+else
+	window.Hand = Hand
 
 # module.exports = Hand

@@ -1,7 +1,7 @@
 (function() {
-  var awesome, playPoker, reportHand;
+  var playPoker, playTen, reportHand, toggle;
 
-  console.log('script.coffee');
+  console.log('script.coffee', Hand);
 
   if (window.Storage && window.JSON) {
     window.storage = function(key) {
@@ -82,25 +82,36 @@
       deck: TheDeck,
       size: 5
     });
-    $('pre').html('');
-    $('pre').append(reportHand(TheHand) + ' ');
-    $('pre').append(JacksOrBetter.score(TheHand, bet).status + '\n');
     theGame = Strategey.play(TheHand);
-    $('pre').append(theGame.rule + '\n');
-    $('pre').append(reportHand(TheHand) + ' ');
     bet = 5;
     score = JacksOrBetter.score(theGame, bet);
     credits = credits - bet;
     credits = credits + score.win;
     the_player.set('cash', the_player.get('cash') + credits);
-    the_player.increment('hands');
-    return $('pre').append(score.status);
+    the_player.set('spend', the_player.get('spend') + bet);
+    return the_player.increment('hands');
   };
 
-  awesome = function() {
-    return playPoker();
-  };
+  toggle = false;
 
-  awesome();
+  $('a.toggle').on('click', function(e) {
+    console.log(toggle);
+    if (toggle === false) {
+      toggle = true;
+    } else {
+      toggle = false;
+    }
+  });
+
+  playTen = function() {
+    console.log('something');
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function(i) {
+      playPoker();
+    });
+    the_player.save();
+    if (toggle) {
+      return playTen();
+    }
+  };
 
 }).call(this);

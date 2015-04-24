@@ -8,6 +8,19 @@ window.Card = ( options ) ->
 	@opts.value = options.value or 0
 	return @
 
+Card::isHigh = () ->
+	if @opts.value is 0
+		return true
+	if @opts.value is 9
+		return true
+	if @opts.value is 10
+		return true
+	if @opts.value is 11
+		return true
+	if @opts.value is 12
+		return true
+	return false
+
 Card::value = () ->
 	return @opts.value
 

@@ -1,4 +1,4 @@
-console.log( 'script.coffee' )
+console.log( 'script.coffee', Hand )
 
 if window.Storage and window.JSON
 	window.storage = (key) ->
@@ -69,12 +69,12 @@ playPoker = ( stream ) ->
 	)
 	# console.log TheHand
 	# console.log reportHand( TheHand )
-	$('pre').html( '' )
-	$('pre').append( reportHand( TheHand ) + ' ' )
-	$('pre').append( JacksOrBetter.score( TheHand, bet ).status + '\n' )
+# $('pre').append( reportHand( TheHand ) + ' ' )
+# $('pre').append( JacksOrBetter.score( TheHand, bet ).status + '\n' )
 	theGame = Strategey.play( TheHand )
-	$('pre').append( theGame.rule + '\n' )
-	$('pre').append( reportHand( TheHand ) + ' ' )
+# $('pre').append( theGame.rule + '\n' )
+	# console.log( theGame.rule )
+# $('pre').append( reportHand( TheHand ) + ' ' )
 	# console.log reportHand( TheHand )
 
 	# Score Poker
@@ -84,19 +84,114 @@ playPoker = ( stream ) ->
 	credits = credits + score.win
 	# console.log credits
 	the_player.set( 'cash', the_player.get('cash') + credits )
+	the_player.set( 'spend', the_player.get('spend') + bet )
 	the_player.increment( 'hands' )
-	$('pre').append( score.status )
+# $('pre').append( score.status )
+# $('pre').append( '\n\n' )
 	# console.log( JSON.stringify( score ) + "\n" )
 
 # playPoker()
 # module.exports = playPoker
 
-awesome = () ->
-	# [1..4].map ( i ) ->
-	playPoker()
 
-awesome()
 
-# window.setInterval( awesome, 100 )
+# window.setInterval( awesome, 10 )
+
+# # shim layer with setTimeout fallback
+# window.requestAnimFrame = do ->
+# 	window.requestAnimationFrame or window.webkitRequestAnimationFrame or window.mozRequestAnimationFrame or (callback) ->
+# 		window.setTimeout callback, 1000 / 60
+# 		return
+# # usage:
+# animloop = ->
+# 	window.requestAnimFrame animloop
+# 	awesome()
+# 	return
+
+# requestAnimationFrame( awesome )
+
+# window.Toggle = ( ) ->
+# 	# @opts = options or {}
+# 	@status = false
+# 	@loop = 0
+# 	return @
+
+# Toggle::fn = () ->
+# 	[1..20].map ( i ) ->
+# 		playPoker()
+# 	the_player.save()
+# 	return requestAnimationFrame( @fn() )
+
+# Toggle::start = (  ) ->
+# 	@status = true
+# 	@loop = @fn()
+# 	return
+
+# Toggle::stop = ( ) ->
+# 	@status = false
+# 	window.cancelAnimationFrame( @fn() )
+# 	return
+
+# Toggle::toggle = ( ) ->
+# 	if @status is false
+# 		@start()
+# 	else
+# 		@stop()
+
+# pokerTime = new Toggle( )
+
+
+
+# $('a.toggle').on 'click', ( e ) ->
+# 	pokerTime.toggle()
+
+	# console.log toggle, myReq
+	# if toggle is false
+	# 	myReq = 0
+	# 	toggle = true
+	# 	myReq = requestAnimationFrame( awesome )
+	# else
+	# 	cancelAnimationFrame( myReq )
+	# 	toggle = false
+	# console.log myReq
+	# return
+
+# myReq = requestAnimationFrame( awesome )
+# cancelAnimationFrame( myReq )
+# console.log myReq
+
+# animloop()
+
+toggle = false
+$('a.toggle').on 'click', ( e ) ->
+	console.log toggle
+	if toggle is false
+		toggle = true
+		# playTen()
+	else
+		toggle = false
+	return
+
+playTen = () ->
+	console.log 'something'
+	# play 10 hands
+	[1..10].map ( i ) ->
+		playPoker()
+		return
+	the_player.save()
+	# if toggle
+	# 	playTen()
+
+
+# x = 1
+# while x < 20
+# 	if x is 5
+# 		break
+# 	x++
+# 	console.log x
+
+# 	[1..20].map ( i ) ->
+# 		playPoker()
+# 	the_player.save()
 
 
